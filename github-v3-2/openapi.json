@@ -1,0 +1,82 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Simple Inventory API",
+    "description" : "This is a simple API",
+    "contact" : {
+      "email" : "you@your-company.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "Secured Admin-only calls"
+  }, {
+    "name" : "developers",
+    "description" : "Operations available to regular developers"
+  } ],
+  "paths" : {
+    "/inventory" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "summary" : "searches inventory",
+        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId" : "searchInventory",
+        "parameters" : [ {
+          "name" : "searchString",
+          "in" : "query",
+          "description" : "pass an optional search string for looking up inventory",
+          "schema" : { }
+        }, {
+          "name" : "skip",
+          "in" : "query",
+          "description" : "number of records to skip for pagination",
+          "schema" : { }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "maximum number of records to return",
+          "schema" : { }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "content" : { }
+          },
+          "400" : {
+            "description" : "bad input parameter",
+            "content" : { }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "admins" ],
+        "summary" : "adds an inventory item",
+        "description" : "Adds an item to the system",
+        "operationId" : "addInventory",
+        "responses" : {
+          "201" : {
+            "description" : "item created",
+            "content" : { }
+          },
+          "400" : {
+            "description" : "invalid input, object invalid",
+            "content" : { }
+          },
+          "409" : {
+            "description" : "an existing item already exists",
+            "content" : { }
+          }
+        }
+      }
+    }
+  },
+  "components" : { }
+}
