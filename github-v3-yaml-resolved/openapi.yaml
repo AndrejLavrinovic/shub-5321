@@ -1,0 +1,83 @@
+---
+openapi: 3.0.1
+info:
+  title: Simple Inventory API
+  description: This is a simple API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    extensions: {}
+  version: 1.0.0
+  extensions: {}
+servers:
+- url: /
+tags:
+- name: admins
+  description: Secured Admin-only calls
+  extensions: {}
+- name: developers
+  description: Operations available to regular developers
+  extensions: {}
+paths:
+  /inventory:
+    get:
+      tags:
+      - developers
+      summary: searches inventory
+      description: |
+        By passing in the appropriate options, you can search for
+        available inventory in the system
+      operationId: searchInventory
+      parameters:
+      - name: searchString
+        in: query
+        description: pass an optional search string for looking up inventory
+        schema:
+          extensions: {}
+        extensions: {}
+      - name: skip
+        in: query
+        description: number of records to skip for pagination
+        schema:
+          extensions: {}
+        extensions: {}
+      - name: limit
+        in: query
+        description: maximum number of records to return
+        schema:
+          extensions: {}
+        extensions: {}
+      responses:
+        200:
+          description: search results matching criteria
+          content: {}
+          extensions: {}
+        400:
+          description: bad input parameter
+          content: {}
+          extensions: {}
+      extensions: {}
+    post:
+      tags:
+      - admins
+      summary: adds an inventory item
+      description: Adds an item to the system
+      operationId: addInventory
+      responses:
+        201:
+          description: item created
+          content: {}
+          extensions: {}
+        400:
+          description: invalid input, object invalid
+          content: {}
+          extensions: {}
+        409:
+          description: an existing item already exists
+          content: {}
+          extensions: {}
+      extensions: {}
+    extensions: {}
+components: {}
